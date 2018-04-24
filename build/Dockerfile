@@ -49,8 +49,10 @@ RUN curl -fsSLo shfmt https://github.com/mvdan/sh/releases/download/v1.3.0/shfmt
 	mv shfmt /usr/bin
 
 # Install common Go tools
+RUN mkdir -p $GOPATH/src/golang.org/x \
+  && git clone --depth 1 https://github.com/golang/lint.git $GOPATH/src/golang.org/x/lint
 RUN go get \
-	github.com/golang/lint/golint \
+	golang.org/x/lint/golint \
 	github.com/fzipp/gocyclo \
 	github.com/fatih/hclfmt \
 	github.com/client9/misspell/cmd/misspell
